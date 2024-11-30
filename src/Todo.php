@@ -21,7 +21,7 @@ class Todo
         ]);
     }
 
-    public function get(): array
+    public function getAllTodos(): array
     {
         $query = "SELECT * FROM todos";
         $stmt = $this->pdo->query($query);

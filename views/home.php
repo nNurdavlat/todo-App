@@ -44,10 +44,8 @@
     <div class="row d-flex justify-content-center">
         <div class="todo-body my-5 p-3">
             <h1 class="text-center todo-text">Todo App</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet,
-                aperiam asperiores atque delectus doloremque esse et id in incidunt,
-                maiores non nulla numquam, omnis pariatur perferendis provident quo sed?</p>
-            <form method="POST" action="/store">
+            <h4 style="text-align: center">Enter the tasks you want to complete</h4>
+            <form method="POST" action="/todos">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Recipient's username"
                            aria-label="Recipient's username" aria-describedby="button-addon2" name="title" required>

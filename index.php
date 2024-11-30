@@ -1,43 +1,54 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); //Bu localhost/ <- Shu bo'sh joydagi yozuvni olib beradi yoki bolmasa "/" shuni oladi
 
-require "helpers.php";
 
 require "src/Todo.php";
+require "helpers.php";
+require 'src/Router.php';
 
-$todos = new Todo();
+$router = new Router();
+$todo = new Todo();
 
-if ($uri == "/") {
-    $todos = $todos->get();
+
+$router->get('/', function(){
+    echo '<a href="/todos">Todos</a>';
+});
+
+$router->get('/todos', function ()use($todo){
+    $todos = $todo->getAllTodos();
     view('home', [
-        'todos' => $todos
+        'todos'=>$todos
     ]);
-} elseif ($uri == '/store') {
-    var_dump($_POST);
+});
+
+$router->get('/complete', function()use($todo){
+    if (!empty($_GET['id'])) {
+        $todo->complete($_GET['id']);
+        header('Location: /todos');
+        exit();
+    }
+});
+
+$router->get('/inProgress', function()use($todo){
+    if (!empty($_GET['id'])) {
+        $todo->inProgress($_GET['id']);
+        header('Location: /todos');
+        exit();
+    }
+});
+
+$router->get('/pending', function()use($todo){
+    if (!empty($_GET['id'])) {
+        $todo->pending($_GET['id']);
+        header('Location: /todos');
+        exit();
+    }
+});
+
+$router->post('/todos', function()use($todo){
     if (!empty($_POST['title']) && !empty($_POST['dueDate'])) {
-        echo "Ifdan o'tdii";
-        $todos->store($_POST['title'], $_POST['dueDate']);
-        header('Location: /');
+        $todo->store($_POST['title'], $_POST['dueDate']);
+        header('Location: /todos');
         exit();
     }
-} elseif ($uri == '/complete') {
-    if (!empty($_GET['id'])) {
-        $todos->complete($_GET['id']);
-        header('Location: /');
-        exit();
-    }
-} elseif ($uri == '/inProgress') {
-    if (!empty($_GET['id'])) {
-        $todos->inProgress($_GET['id']);
-        header('Location: /');
-        exit();
-    }
-} elseif ($uri == '/pending') {
-    if (!empty($_GET['id'])) {
-        $todos->pending($_GET['id']);
-        header('Location: /');
-        exit();
-    }
-}
+});
+
