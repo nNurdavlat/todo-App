@@ -10,7 +10,10 @@ $todo = new Todo();
 
 
 $router->get('/', function(){
-    echo '<a href="/todos">Todos</a>';
+    echo '<div>
+        <p>Click the button and go to the main page</p>
+        <a href="/todos">Todos</a>
+</div>';
 });
 
 $router->get('/todos', function ()use($todo){
