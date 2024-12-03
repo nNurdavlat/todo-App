@@ -10,41 +10,32 @@ $todo = new Todo();
 
 
 $router->get('/', function(){
-    echo '<div>
-        <p>Click the button and go to the main page</p>
-        <a href="/todos">Todos</a>
-</div>';
+   view('home');
 });
 
 $router->get('/todos', function ()use($todo){
     $todos = $todo->getAllTodos();
-    view('home', [
+    view('todos', [
         'todos'=>$todos
     ]);
 });
 
-$router->get('/complete', function()use($todo){
-    if (!empty($_GET['id'])) {
-        $todo->complete($_GET['id']);
-        header('Location: /todos');
-        exit();
-    }
+$router->get('/inProgress/{id}', function ($todoId) use($todo){
+    $todo->inProgress($todoId);
+    header('Location: /todos');
 });
 
-$router->get('/inProgress', function()use($todo){
-    if (!empty($_GET['id'])) {
-        $todo->inProgress($_GET['id']);
+$router->get('/complete/{id}', function($todoId) use($todo){
+        $todo->complete($todoId);
         header('Location: /todos');
         exit();
-    }
 });
 
-$router->get('/pending', function()use($todo){
-    if (!empty($_GET['id'])) {
-        $todo->pending($_GET['id']);
+
+$router->get('/pending/{id}', function($todoId)use($todo){
+        $todo->pending($todoId);
         header('Location: /todos');
         exit();
-    }
 });
 
 $router->post('/todos', function()use($todo){
