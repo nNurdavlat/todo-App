@@ -60,32 +60,31 @@
 
                 <?php
                 /** @var TYPE_NAME $todos */
-                foreach ($todos as $data) {
-                    if ($data['status'] == 'completed') {
+                foreach ($todos as $data)
+                {
                         echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
                             . $data['title'] . '
                                 <div>
-                                    <a href="/inProgress/' . $data['id'] . '" class="btn btn-outline-success">In progress</a>
-                                    <a href="/pending/' . $data['id'] . ' " class="btn btn-outline-success">Pending</a>
+                                    <a href="/todos/' . $data['id'] . '/edit" class="btn btn-outline-success">Edit</a>
+                                    <a href="/todos/' . $data['id'] . '/delete" class="btn btn-outline-success">Delete</a>
                                 </div>                                
-                            </li>';
-                    } elseif ($data['status'] == 'pending') {
-                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
-                            . $data['title'] . '
-                                <div>
-                                    <a href="/inProgress/' . $data['id'] . '" class="btn btn-outline-success">In progress</a>
-                                    <a href="/complete/' . $data['id'] . ' " class="btn btn-outline-success">Complete</a>
-                                </div>                                
-                            </li>';
-                    } elseif ($data['status'] == 'in_progress') {
-                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
-                            . $data['title'] . '
-                                <div>
-                                    <a href="/pending/' . $data['id'] . '" class="btn btn-outline-success">Pending</a>
-                                    <a href="/complete/' . $data['id'] . ' " class="btn btn-outline-success">Complete</a>
-                                </div>                                
-                            </li>';
-                    }
+                           </li>';
+//                    elseif ($data['status'] == 'pending') {
+//                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
+//                            . $data['title'] . '
+//                                <div>
+//                                    <a href="/todos/' . $data['id'] . '/inProgress" class="btn btn-outline-success">In progress</a>
+//                                    <a href="/todos/' . $data['id'] . '/complete" class="btn btn-outline-success">Complete</a>
+//                                </div>
+//                            </li>';
+//                    } elseif ($data['status'] == 'in_progress') {
+//                        echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
+//                            . $data['title'] . '
+//                                <div>
+//                                    <a href="/todos/' . $data['id'] . '/pending" class="btn btn-outline-success">Pending</a>
+//                                    <a href="/todos/' . $data['id'] . '/complete" class="btn btn-outline-success">Complete</a>
+//                                </div>
+//                            </li>';
                 }
                 ?>
             </ul>
