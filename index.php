@@ -1,12 +1,14 @@
 <?php
 
-require "src/Todo.php";
-require "helpers.php";
-require 'src/Router.php';
+require 'autoload.php'; // Require larni kamaytirish uchun 1 ta filega tiqib qo'ydik va o'sha fileni chaqirib qo'ydik xolos
 
 $router = new Router();
 $todo = new Todo();
 
+$router->put('/todos/{id}/update', function ($todoId) use($todo){
+    $todo->update($todoId, $_POST['title'], $_POST['status'], $_POST['dueDate']);
+    redirect('/todos');
+});
 
 $router->get('/', function(){
    view('home');
@@ -42,19 +44,11 @@ $router->post('/todos', function()use($todo){
 }); // Yozish
 
 
-$router->get('/todos/{id}/pending', function($todoId)use($todo){
-    $todo->pending($todoId);
-    redirect('/todos');
-}); //Pending
+if ($router->currentRoute == "/telegram") {
+    $bot = new Bot();
 
-
-$router->get('/todos/{id}/inProgress', function ($todoId) use($todo){
-    $todo->inProgress($todoId);
-    redirect('/todos');
-}); // inProgress
-
-
-$router->get('/todos/{id}/complete', function($todoId) use($todo){
-    $todo->complete($todoId);
-    redirect('/todos');
-}); // Complete
+    $bot->makeRequest('sendMessage', [ // Qayerga nima Jo'natish kerak shuni yozamiz
+        'chat_id' => 430656976,
+        'text' => "Hello. You're Welcome",
+    ]);
+} // Telegram bot uchun
