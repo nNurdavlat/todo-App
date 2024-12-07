@@ -10,3 +10,9 @@ function redirect(string $url){
     header("Location: $url");
     exit;
 }
+
+function dumpDie($value)
+{
+    var_dump($value);
+    exit();
+}  // Xatoliklarni tekshirib oldini olish uchun
