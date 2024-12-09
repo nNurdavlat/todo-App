@@ -1,6 +1,6 @@
 <?php
+require 'autoload.php';
 
-require 'autoload.php'; // Require larni kamaytirish uchun 1 ta filega tiqib qo'ydik va o'sha fileni chaqirib qo'ydik xolos
 
 $router = new Router();
 $todo = new Todo();
@@ -27,8 +27,8 @@ $router->put('/todos/{id}/update', fn($todoId) => require 'Controllers/updateCon
 if ($router->currentRoute == "/telegram") {
     $bot = new Bot();
 
-    $bot->makeRequest('sendMessage', [ // Qayerga nima Jo'natish kerak shuni yozamiz
+    $bot->makeRequest('sendMessage', [
         'chat_id' => 430656976,
         'text' => "Hello. You're Welcome",
     ]);
-} // Telegram bot uchun
+}
