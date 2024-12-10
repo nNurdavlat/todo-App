@@ -1,7 +1,4 @@
 <?php
-
-use App\Todo;
-
 view('todos', [
-    'todos'=>(new Todo())->getAllTodos()
+    'todos'=>(new \App\Todo())->getAllTodos()
     ]);
