@@ -1,6 +1,7 @@
 <?php
+namespace App;
 
-require 'DB.php';
+
 class User
 {
     public $pdo;

@@ -4,7 +4,7 @@ require 'views/components/navbar.php';
 ?>
 <div class="form-container">
     <h2 class="text-center mb-4">Register</h2>
-    <form>
+    <form action="/register" method="POST">
         <div class="mb-3">
             <label for="registerName" class="form-label">Name</label>
             <input type="text" class="form-control" id="registerName" placeholder="Enter your name" name="full_name" required>

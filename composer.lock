@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "57cb849bcf7fd131dacb252aabf74bfa",
+    "content-hash": "16b3b031dd425f5424682c78e724642c",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -394,26 +394,26 @@
             "time": "2024-07-18T11:15:46+00:00"
         },
         {
-            "name": "mp091689/dump-die",
-            "version": "V1.0.2",
+            "name": "larapack/dd",
+            "version": "1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mp091689/dump-die.git",
-                "reference": "aa0c15b0e971231114e784f9a7f076542b1f646e"
+                "url": "https://github.com/larapack/dd.git",
+                "reference": "561b5111a13d0094b59b5c81b1572489485fb948"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mp091689/dump-die/zipball/aa0c15b0e971231114e784f9a7f076542b1f646e",
-                "reference": "aa0c15b0e971231114e784f9a7f076542b1f646e",
+                "url": "https://api.github.com/repos/larapack/dd/zipball/561b5111a13d0094b59b5c81b1572489485fb948",
+                "reference": "561b5111a13d0094b59b5c81b1572489485fb948",
                 "shasum": ""
             },
             "require": {
-                "symfony/var-dumper": "~3.3"
+                "symfony/var-dumper": "*"
             },
-            "type": "extension",
+            "type": "package",
             "autoload": {
                 "files": [
-                    "src/helpers.php"
+                    "src/helper.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -422,25 +422,16 @@
             ],
             "authors": [
                 {
-                    "name": "Mykyta Popov",
-                    "email": "mp091689@gmail.com"
+                    "name": "Mark Topper",
+                    "email": "hi@webman.io"
                 }
             ],
-            "description": "Dump Die package based on symfony/var-dumper.",
-            "keywords": [
-                "dd",
-                "dump die",
-                "dump-die",
-                "dumper",
-                "mp091689",
-                "var-dump",
-                "var-dumper"
-            ],
+            "description": "`dd` is a helper method in Laravel. This package will add the `dd` to your application.",
             "support": {
-                "issues": "https://github.com/mp091689/dump-die/issues",
-                "source": "https://github.com/mp091689/dump-die/tree/master"
+                "issues": "https://github.com/larapack/dd/issues",
+                "source": "https://github.com/larapack/dd/tree/master"
             },
-            "time": "2017-09-17T05:39:54+00:00"
+            "time": "2016-12-15T09:34:34+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -893,8 +884,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1029,34 +1020,38 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.4.47",
+            "version": "v6.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "0719f6cf4633a38b2c1585140998579ce23b4b7d"
+                "reference": "38254d5a5ac2e61f2b52f9caf54e7aa3c9d36b80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0719f6cf4633a38b2c1585140998579ce23b4b7d",
-                "reference": "0719f6cf4633a38b2c1585140998579ce23b4b7d",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/38254d5a5ac2e61f2b52f9caf54e7aa3c9d36b80",
+                "reference": "38254d5a5ac2e61f2b52f9caf54e7aa3c9d36b80",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
-                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
+                "symfony/console": "<5.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "twig/twig": "~1.34|~2.4"
+                "symfony/console": "^5.4|^6.0|^7.0",
+                "symfony/error-handler": "^6.3|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/process": "^5.4|^6.0|^7.0",
+                "symfony/uid": "^5.4|^6.0|^7.0",
+                "twig/twig": "^2.13|^3.0.4"
             },
-            "suggest": {
-                "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
-                "ext-intl": "To show region name in time zone dump",
-                "ext-symfony_debug": ""
-            },
+            "bin": [
+                "Resources/bin/var-dump-server"
+            ],
             "type": "library",
             "autoload": {
                 "files": [
@@ -1083,14 +1078,14 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "description": "Provides mechanisms for walking through any arbitrary PHP variable",
             "homepage": "https://symfony.com",
             "keywords": [
                 "debug",
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v3.4.47"
+                "source": "https://github.com/symfony/var-dumper/tree/v6.4.15"
             },
             "funding": [
                 {
@@ -1106,7 +1101,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T10:57:07+00:00"
+            "time": "2024-11-08T15:28:48+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1199,9 +1194,7 @@
     "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "ext-pdo": "*"
-    },
+    "platform": {},
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
