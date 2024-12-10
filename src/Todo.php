@@ -1,5 +1,5 @@
 <?php
-require "DB.php";
+namespace App;
 
 class Todo
 {
@@ -13,7 +13,7 @@ class Todo
 
     public function store($title, $dueDate)
     {
-        $query = "INSERT INTO todos(title, status, due_date, created_at, updated_at) 
+        $query = "INSERT INTO todos(title, status, due_date, created_at, update_at) 
                 VALUES (:title, 'pending', :dueDate, NOW(), NOW())";
         $this->pdo->prepare($query)->execute([
             ":title" => $title,
@@ -47,7 +47,7 @@ class Todo
 
     public function update(int $id, string $title, string $status,string $dueDate)
     {
-        $query = "UPDATE todos SET title=:title ,status=:status, due_date=:dueDate,updated_at=NOW() where id=:id";
+        $query = "UPDATE todos SET title=:title ,status=:status, due_date=:dueDate,update_at=NOW() where id=:id";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ":id" => $id,

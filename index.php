@@ -4,7 +4,8 @@ ini_set('display_startup_errors', 1);
 
 require 'bootstrap.php'; // Hammasidan oldin bootstrap.php ni chaqirib olamiz. Bo'lmasa DB.php da muamo bo'ladi
 require 'autoload.php'; // Require larni kamaytirish uchun 1 ta filega tiqib qo'ydik va o'sha fileni chaqirib qo'ydik xolos
-
+use App\Router;
+use App\Todo;
 $router = new Router();
 $todo = new Todo();
 

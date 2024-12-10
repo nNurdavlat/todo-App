@@ -1,5 +1,6 @@
 <?php
 require 'views/components/header.php';
+require 'views/components/navbar.php';
 ?>
 <div class="container">
     <div class="row d-flex justify-content-center">
@@ -26,8 +27,8 @@ require 'views/components/header.php';
                         echo '<li class="' . $data['status'] . ' list-group-item d-flex justify-content-between align-items-center">'
                             . $data['title'] . '
                                 <div>
-                                    <a href="/todos/' . $data['id'] . '/edit" class="btn btn-outline-success">Edit</a>
-                                    <a href="/todos/' . $data['id'] . '/delete" class="btn btn-outline-success">Delete</a>
+                                    <a href="/todos/' . $data['id'] . '/edit" class="btn btn-outline-primary">Edit</a>
+                                    <a href="/todos/' . $data['id'] . '/delete" class="btn btn-outline-danger">Delete</a>
                                 </div>                                
                            </li>';
 //                    elseif ($data['status'] == 'pending') {
@@ -52,6 +53,8 @@ require 'views/components/header.php';
         </div>
     </div>
 </div>
-<?php
-require 'views/components/footer.php';
-?>
+<div style="position: fixed; width: 100%; bottom: 0; ">
+    <?php
+    require 'views/components/footer.php';
+    ?>
+</div>
