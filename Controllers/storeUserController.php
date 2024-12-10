@@ -18,3 +18,6 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['pas
 
 $_SESSION['error_message'] = 'Email already exists';
 redirect('/register');
+
+
+
