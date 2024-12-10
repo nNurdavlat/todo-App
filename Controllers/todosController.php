@@ -1,5 +1,7 @@
 <?php
-require_once 'autoload.php';
+
+use App\Todo;
+
 view('todos', [
     'todos'=>(new Todo())->getAllTodos()
     ]);
