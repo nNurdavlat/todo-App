@@ -7,21 +7,22 @@ require 'views/components/navbar.php';
     <form>
         <div class="mb-3">
             <label for="registerName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="registerName" placeholder="Enter your name" required>
+            <input type="text" class="form-control" id="registerName" placeholder="Enter your name" name="full_name" required>
         </div>
         <div class="mb-3">
             <label for="registerEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="registerPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="registerPassword" placeholder="Enter your password" required>
+            <input type="password" class="form-control" id="registerPassword" placeholder="Enter your password" name="password" required>
         </div>
         <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" name="repeat_password" required>
         </div>
         <div class="d-grid">
+            <p class="text-danger text-center" style="display: block;"><?= $_SESSION['error_message'] ?? ''?></p>
             <button type="submit" class="btn btn-success">Register</button>
         </div>
     </form>

@@ -10,18 +10,21 @@ $todo = new Todo();
 
 
 
-
-
-
-
-
 $router->get('/',fn()=> require 'Controllers/homeController.php'); // Home page
+
+
+$router->get('/register', fn() => view('register')); // Agar register get bolsa. Register UI
+
+$router->post('/register', fn() => require 'Controllers/storeUserController.php'); // Agar Register post bo'lsa. Databasega yozish
+
+
+
+
 
 
 $router->get('/login', fn() => view('login')); // Login UI
 
 
-$router->get('/register', fn() => view('register')); // Register UI
 
 $router->get('/todos', fn()=> require 'Controllers/todosController.php'); // Hammasini ekranga chiqarishga
 
