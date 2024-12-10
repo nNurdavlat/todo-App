@@ -1,5 +1,5 @@
 <?php
-require 'views/componets/header.php';
+require 'views/components/header.php';
 ?>
 <div class="container">
     <div class="row d-flex justify-content-center">
@@ -53,5 +53,5 @@ require 'views/componets/header.php';
     </div>
 </div>
 <?php
-require 'views/componets/footer.php';
+require 'views/components/footer.php';
 ?>

@@ -1,5 +1,5 @@
 <?php
-require "views/componets/header.php";
+require "views/components/header.php";
 ?>
 <div class="edit-container">
     <h2 class="edit-header">Edit Task</h2>
@@ -29,5 +29,5 @@ require "views/componets/header.php";
     </form>
 </div>
 <?php
-require "views/componets/footer.php";
+require "views/components/footer.php";
 ?>

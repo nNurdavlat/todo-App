@@ -1,47 +1,40 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
+require 'bootstrap.php'; // Hammasidan oldin bootstrap.php ni chaqirib olamiz. Bo'lmasa DB.php da muamo bo'ladi
 require 'autoload.php'; // Require larni kamaytirish uchun 1 ta filega tiqib qo'ydik va o'sha fileni chaqirib qo'ydik xolos
 
 $router = new Router();
 $todo = new Todo();
 
-$router->put('/todos/{id}/update', function ($todoId) use($todo){
-    $todo->update($todoId, $_POST['title'], $_POST['status'], $_POST['dueDate']);
-    redirect('/todos');
-});
-
-$router->get('/', function(){
-   view('home');
-}); // Home page
-
-$router->get('/todos', function ()use($todo){
-    $todos = $todo->getAllTodos();
-    view('todos', [
-        'todos'=>$todos
-    ]);
-}); // Hammasini ekranga chiqarishga
 
 
-$router->get('/todos/{id}/edit', function($todoId) use($todo){
-    $getTodo = $todo->getTodo($todoId);
-    view('edit', [
-        'todo'=>$getTodo
-    ]);
-}); // Edit qilishga
+$router->get('/',fn()=> require 'Controllers/homeController.php'); // Home page
 
 
-$router->get('/todos/{id}/delete', function($todoId) use($todo){
-    $todo->destroy($todoId);
-    redirect('/todos');
-}); // O'chirishga
+$router->get('/login', fn() => view('login')); // Login UI
 
 
-$router->post('/todos', function()use($todo){
-    if (!empty($_POST['title']) && !empty($_POST['dueDate'])) {
-        $todo->store($_POST['title'], $_POST['dueDate']);
-        redirect('/todos');
-    }
-}); // Yozish
+$router->get('/register', fn() => view('register')); // Register UI
+
+$router->get('/todos', fn()=> require 'Controllers/todosController.php'); // Hammasini ekranga chiqarishga
+
+
+$router->post('/todos', fn()=> require 'Controllers/writeController.php'); // Yozish
+
+
+
+
+$router->get('/todos/{id}/edit', fn($todoId) => require 'Controllers/editController.php'); // Edit qilishga
+
+
+$router->get('/todos/{id}/delete', fn($todoId)=> require 'Controllers/deleteController.php'); // O'chirishga
+
+
+$router->put('/todos/{id}/update', fn($todoId) => require 'Controllers/updateController.php');
+
+
 
 
 if ($router->currentRoute == "/telegram") {
