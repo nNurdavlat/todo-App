@@ -2,6 +2,7 @@
 require 'views/components/header.php';
 require 'views/components/navbar.php';
 ?>
+
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="todo-body my-5 p-3">
