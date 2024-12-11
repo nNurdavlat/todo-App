@@ -7,10 +7,11 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['pas
         exit();
     }
 
-    $lastUserId = (new \App\User())->register($_POST['full_name'], $_POST['email'], $_POST['password']);
-    if ($lastUserId) {
+    $user = (new \App\User())->register($_POST['full_name'], $_POST['email'], $_POST['password']);
+    if (!$user) {
         unset($_SESSION['error_message']);
-        $_SESSION['user_id'] = $lastUserId;
+        unset($_SESSION['password']);
+        $_SESSION['user'] = $user;
         redirect('/todos');
         exit();
     }
