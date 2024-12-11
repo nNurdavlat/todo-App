@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $user = (new \App\User())->login($_POST['email'], $_POST['password']);
     if ($user) {
