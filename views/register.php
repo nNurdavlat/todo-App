@@ -23,7 +23,7 @@ require 'views/components/navbar.php';
         </div>
         <div class="d-grid">
             <p class="text-danger text-center" style="display: block;"><?= $_SESSION['error_message'] ?? ''?></p>
-            <button type="submit" class="btn btn-success">Register</button>
+            <button href="/todos" type="submit" class="btn btn-success">Register</button href="todos">
         </div>
     </form>
     <p class="text-center mt-3">
