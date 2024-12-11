@@ -85,12 +85,12 @@
 
         .completed {
             text-decoration: line-through;
-            color: red;
+            color: green;
         }
 
         .in_progress {
             text-decoration: underline;
-            color: blue;
+            color: yellow;
         }
         .home-body {
             background-color: #f8f9fa;

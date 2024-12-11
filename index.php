@@ -23,7 +23,7 @@ $router->post('/register', fn() => require 'Controllers/storeUserController.php'
 
 
 
-$router->get('/login', fn() => view('login')); // Login UI
+$router->get('/login', fn() => view('login')); // Agar login get bolsa. Login UI
 
 
 

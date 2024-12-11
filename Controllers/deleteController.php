@@ -1,5 +1,4 @@
 <?php
-require_once 'autoload.php';
 
-(new Todo())->destroy($todoId);
+(new \App\Todo())->destroy($todoId);
 redirect('/todos');
