@@ -1,6 +1,8 @@
 <?php
-
+var_dump($_POST['full_name']);
 if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['repeat_password'])) {
+    var_dump($_POST['full_name']);
+//    return;
     if ($_POST['password'] != $_POST['repeat_password']) {
         $_SESSION['error_message'] = 'Passwords do not match';
         redirect('/register');

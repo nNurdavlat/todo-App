@@ -22,7 +22,7 @@ require 'views/components/navbar.php';
             <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" name="repeat_password" required>
         </div>
         <div class="d-grid">
-            <p class="text-danger text-center" style="display: block;"><?= $_SESSION['error_message'] ?? ''?></p>
+            <p class="text-danger text-center" style="display: block;"><?= $_SESSION['error_message'] ?? '' ?></p>
             <button type="submit" class="btn btn-success">Register</button>
         </div>
     </form>

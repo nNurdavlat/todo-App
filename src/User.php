@@ -16,11 +16,11 @@ class User
         string $password
     ): bool
     {
-        $query = "INSERT INTO users (username, password, email) 
-                    VALUES (:username, :password, :email)";
+        $query = "INSERT INTO users (full_name, password, email) 
+                    VALUES (:full_name, :password, :email)";
         $stmt = $this->pdo->prepare($query);
          return $stmt->execute([
-            ':username' => $fullName,
+            ':full_name' => $fullName,
             ':password' => $password,
             ':email' => $email
         ]);
