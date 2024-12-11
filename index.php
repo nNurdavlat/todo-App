@@ -19,8 +19,10 @@ $router->get('/register', fn() => view('register')); // Agar register get bolsa.
 $router->post('/register', fn() => require 'Controllers/storeUserController.php'); // Agar Register post bo'lsa. Databasega yozish
 
 
+$router->get('/login', fn() => view('login'));
 
 
+$router->post('/login', fn() => require 'Controllers/loginUserControllers.php');
 
 
 $router->get('/login', fn() => view('login')); // Agar login get bolsa. Login UI
