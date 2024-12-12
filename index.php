@@ -33,6 +33,8 @@ $router->get('/todos/{id}/delete', fn($todoId)=> require 'Controllers/deleteCont
 
 $router->put('/todos/{id}/update', fn($todoId) => require 'Controllers/updateController.php');
 
+$router->get('/logout', fn() => require 'Controllers/logauthcontroller.php');
+
 if ($router->currentRoute == "/telegram") {
     $bot = new Bot();
 

@@ -3,7 +3,7 @@ require 'views/components/header.php';
 require 'views/components/navbar.php';
 ?>
 <div class="form-container">
-    <h2  href="/login" class="text-center mb-4">Login</h2>
+    <h2  href="/login" class="text-center mb-4">Sign Up</h2>
     <form action="/login" method="post">
         <div class="mb-3">
             <label for="loginEmail" class="form-label">Email</label>

@@ -3,7 +3,7 @@ require 'views/components/header.php';
 require 'views/components/navbar.php';
 ?>
 <div class="form-container">
-    <h2 class="text-center mb-4">Register</h2>
+    <h2 class="text-center mb-4">Create Account</h2>
     <form action="/register" method="POST">
         <div class="mb-3">
             <label for="registerName" class="form-label">Name</label>
@@ -12,7 +12,7 @@ require 'views/components/navbar.php';
         <div class="mb-3">
             <label for="registerEmail" class="form-label">Email</label>
             <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" name="email" required>
-        </div>
+        </div>рр
         <div class="mb-3">
             <label for="registerPassword" class="form-label">Password</label>
             <input type="password" class="form-control" id="registerPassword" placeholder="Enter your password" name="password" required>
