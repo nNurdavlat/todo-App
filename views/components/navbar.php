@@ -21,6 +21,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/todos">To-do List</a></li>
                             <li><a class="dropdown-item" href="/todos"><?= $_SESSION['user']['full_name'] ?? '' ?></a></li>
+                            <li class="nav-item"><a class="btn btn-primary" href="/logout">Log out</a></li>
                         </ul>
                     </li>
                 <?php

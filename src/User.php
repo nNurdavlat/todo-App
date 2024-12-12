@@ -11,11 +11,12 @@ class User {
         $this->pdo = $db->conn;
     }
 
-    public function register(
+    public function     register(
         string $fullName,
         string $email,
         string $password
-    ): bool|int {
+    ): mixed
+    {
 
         $select = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $select->bindParam(":email", $email);
@@ -27,7 +28,7 @@ class User {
         $query = "INSERT INTO users (full_name, password, email) 
                     VALUES (:username, :password, :email)";
         $stmt = $this->pdo->prepare($query);
-         return $stmt->execute([
+         $stmt->execute([
             ':username' => $fullName,
             ':password' => $password,
             ':email' => $email
