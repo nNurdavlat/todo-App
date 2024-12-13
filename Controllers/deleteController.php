@@ -1,5 +1,6 @@
 <?php
-require_once 'autoload.php';
+//require_once 'autoload.php';
 
-(new Todo())->destroy($todoId);
+/** @var TYPE_NAME $todoId */
+(new \App\Todo())->destroy($todoId);
 redirect('/todos');
