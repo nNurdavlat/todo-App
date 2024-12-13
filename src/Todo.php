@@ -9,17 +9,18 @@ class Todo{
         $this->pdo = $db->conn;
     }
 
-    public function store($title, $dueDate){
-        $query = "INSERT INTO todos(title, status, due_date, created_at, updated_at) 
-                VALUES (:title, 'pending', :dueDate, NOW(), NOW())";
+    public function store($title, $dueDate, $userId){
+        $query = "INSERT INTO todos(title, status, due_date, created_at, updated_at, user_id) 
+                VALUES (:title, 'pending', :dueDate, NOW(), NOW(), :userId)";
         $this->pdo->prepare($query)->execute([
             ":title" => $title,
             ":dueDate" => $dueDate,
+            ":userId" => $userId
         ]);
     }
 
-    public function getAllTodos(): array{
-        $query = "SELECT * FROM todos";
+    public function getAllTodos($userId): array{
+        $query = "SELECT * FROM todos WHERE user_id = $userId";
         $stmt = $this->pdo->query($query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -47,7 +48,7 @@ class Todo{
             ":id" => $id,
             ":title" => $title,
             ":status" => $status,
-            ":dueDate" => $dueDate,
+            ":dueDate" => $dueDate
         ]);
     }
 
