@@ -11,8 +11,12 @@ function redirect(string $url){
     exit;
 }
 
-function dumpDie($value)
-{
+function dumpDie($value){
     var_dump($value);
     exit();
 }  // Xatoliklarni tekshirib oldini olish uchun
+#[NoReturn] function apiResponse($data): void {
+    header('Content-Type: applicatoin/json');
+    echo json_encode($data);
+    exit();
+}
