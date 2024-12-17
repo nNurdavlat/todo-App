@@ -89,9 +89,7 @@ class Router
             var_dump(123);
             if (isset($_POST['_method']) &&  $_POST['_method'] == 'PUT')
             {
-
                 $resourceValue = $this->getResource($route);  // getResource dan qaytvotgan returni shunga tenglab olamiz
-
                 if ($resourceValue)
                 {
                     $resourceRoute = str_replace('{id}', $resourceValue, $route);
