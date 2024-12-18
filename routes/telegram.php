@@ -1,11 +1,19 @@
 <?php
 
 use App\Bot;
+
+use App\User;
+
+use App\Todo;
+
 $update = json_decode(file_get_contents('php://input'));
 
 $chatId = $update->message->chat->id;
 $text = $update->message->text;
 
+$todo = new Todo();
+
+$user = new User();
 
 $bot= new Bot();
 
@@ -20,6 +28,9 @@ if ($text == '/start') {
 
 if(mb_stripos($text, '/start') !== false ){
     $userId=explode('/start', $text)[1];
+
+    $user->setTelegramId($userId, $chatId );
+
     $bot->makeRequest('sendMessage', [
         'chat_id' => $chatId,
         'text'=>'welcome Todo bot (mb_stripos)' . $userId
@@ -35,3 +46,21 @@ if ($text == '/help') {
     ]);
     exit();
 }
+ if ($text == '/tasks') {
+     $tasks = $todo->getTodosByTelegramId($chatId);
+     if(!empty($tasks)){
+         $responseText = "Tasks:\n\n";
+         foreach ($tasks as $index => $task) {
+             $responseText .= $index . '. ' . $task['title'] . "\n";
+             $responseText .= $task['due_date'] . "\n";
+             $responseText .= $task['status'] . "\n";
+             $responseText .= "\n============================\n";
+         }
+     }
+     $bot->makeRequest('sendMessage', [
+         'chat_id' => $chatId,
+         'text' => $responseText,
+     ]);
+
+
+ }

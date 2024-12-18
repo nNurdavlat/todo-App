@@ -6,6 +6,7 @@ use PDO;
 class User
 {
     public $pdo;
+
     public function __construct()
     {
         $db = new DB();
@@ -16,7 +17,7 @@ class User
         string $fullName,
         string $email,
         string $password
-    ):mixed
+    ): mixed
     {
         $select = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $select->bindParam(":email", $email);
@@ -51,14 +52,6 @@ class User
 //        ]);
 
 
-
-
-
-
-
-
-
-
 //
 //        // Bazadan parolni olish
 //        $query = "SELECT password FROM users WHERE email = :email";
@@ -82,21 +75,19 @@ class User
 //        }
 
 
-
-
         $query = "INSERT INTO users (full_name, password, email)
                     VALUES (:full_name, :password, :email)";
         $stmt = $this->pdo->prepare($query);
-         $stmt->execute([
+        $stmt->execute([
             ':full_name' => $fullName,
             ':password' => $password,
             ':email' => $email
         ]);
-        $id=$this->pdo->lastInsertId();
+        $id = $this->pdo->lastInsertId();
         return $this->getUserById($id);
     }
 
-    public function login(string $email, string $password): array | bool
+    public function login(string $email, string $password): array|bool
     {
         $query = "SELECT * FROM users WHERE email = :email AND password = :password";
         $stmt = $this->pdo->prepare($query);
@@ -110,7 +101,9 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
-    public function getUserById(int $id): mixed{
+
+    public function getUserById(int $id): mixed
+    {
         $query = "SELECT * FROM users WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
@@ -119,5 +112,16 @@ class User
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function setTelegramId(int $userId, int $chatId ): void
+    {
+        $query = "UPDATE users SET telegram_id = :chatId WHERE id = :userId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':chatId' => $chatId,
+            ':userId' => $userId
+        ]);
+    }
+
 
 }
