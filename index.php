@@ -8,10 +8,10 @@ require 'router.php';
 
 
 //if ($router->currentRoute == "/telegram") {
-//    $bot = new Bot();
+//    $telegram = new telegram();
 //
-//    $bot->makeRequest('sendMessage', [ // Qayerga nima Jo'natish kerak shuni yozamiz
+//    $telegram->makeRequest('sendMessage', [ // Qayerga nima Jo'natish kerak shuni yozamiz
 //        'chat_id' => 430656976,
 //        'text' => "Hello. You're Welcome",
 //    ]);
-//} // Telegram bot uchun
+//} // Telegram telegram uchun
