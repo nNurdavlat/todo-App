@@ -9,11 +9,12 @@ class Bot
     public function __construct()
     {
         $this->client = new Client([
-            "base_uri" => "https://api.telegram.org/bot" . $_ENV['TELEGRAM_BOT_TOKEN']."/"
+            'base_uri' => 'https://api.telegram.org/bot' . $_ENV['TELEGRAM_BOT_TOKEN'] . '/'
         ]);
     }
 
-    public function makeRequest($method, $parames){
+    public function makeRequest(string $method, array $parames)
+    {
         $this->client->post($method, ['json' => $parames]);
     }
 }
