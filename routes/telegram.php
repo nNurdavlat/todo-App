@@ -15,8 +15,8 @@ $text = $update->message->text;
 
 if ($text == '/start') { // Bu faqatgina quruq starni o'ziga ishlaydi "/start 4" ga ishlamaydi
     $bot->makeRequest('sendMessage', [
-        'chat_id' => $chatID,
-        'text' => 'Welcome to the Todo App'
+        'chat_id' => $chatID,  // Kimga yuborish kerak
+        'text' => 'Welcome to the Todo App'  // Nima narsa yuborish kerak
     ]);
     exit();
 }
@@ -33,20 +33,6 @@ if (mb_stripos($text, '/start') !== false)  // Bu yerda webdan start bosilsa shu
 }
 
 if ($text == '/tasks') {
-    $todo = new Todo();
-    $tasks = $todo->getTodoByTelegramId(430656976);
-    $tasksLIst = "Your tasks:\n\n";
-
-    foreach ($tasks as $task) {
-        $tasksLIst .= $task['title'] . "\n";
-        $tasksLIst .= $task['due_date'] . "\n";
-        $tasksLIst .= $task['status'] . "\n\n";
-        $tasksLIst .= "===========================\n\n";
-    }
-
-    $bot->makeRequest('sendMessage', [
-        'chat_id' => $chatID,
-        'text' => $tasksLIst
-    ]);
+    $bot->sendUserTasks($chatID);
     exit();
 }
