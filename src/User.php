@@ -55,4 +55,16 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+    public function setTelegramId(int $userId, int $chatId)
+    {
+        $query = "UPDATE users SET telegram_id = :chatId WHERE id = :user_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ':chatId' => $chatId,
+            ':user_id' => $userId
+        ]);
+
+    }
+
 }

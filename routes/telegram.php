@@ -1,6 +1,8 @@
 <?php
 
 use App\Bot;
+use App\Todo;
+
 
 $bot  = new Bot();
 
@@ -19,18 +21,32 @@ if ($text == '/start') { // Bu faqatgina quruq starni o'ziga ishlaydi "/start 4"
     exit();
 }
 
-if (mb_stripos($text, '\start') !== false)  // Bu yerda webdan start bosilsa shu yer ishlaydi
-{ // "/start 4" Bo'lsa shu yeri ishlashi kerak
+if (mb_stripos($text, '/start') !== false)  // Bu yerda webdan start bosilsa shu yer ishlaydi. "/start 4" Bo'lsa shu yeri ishlashi kerak
+{
+    $userId = explode("/start", $text)[1];
+    $user = new \App\User();
+    $user->setTelegramId($userId, $chatID);
     $bot->makeRequest('sendMessage', [
         'chat_id' => $chatID,
         'text' => "MB STRIPOS dan keldi"
     ]);
 }
 
-if ($text == '/help') {
+if ($text == '/tasks') {
+    $todo = new Todo();
+    $tasks = $todo->getTodoByTelegramId(430656976);
+    $tasksLIst = "Your tasks:\n\n";
+
+    foreach ($tasks as $task) {
+        $tasksLIst .= $task['title'] . "\n";
+        $tasksLIst .= $task['due_date'] . "\n";
+        $tasksLIst .= $task['status'] . "\n\n";
+        $tasksLIst .= "===========================\n\n";
+    }
+
     $bot->makeRequest('sendMessage', [
         'chat_id' => $chatID,
-        'text' => 'Here is a help message'
+        'text' => $tasksLIst
     ]);
     exit();
 }

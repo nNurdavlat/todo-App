@@ -52,4 +52,16 @@ class Todo{
         ]);
     }
 
+
+
+    public function getTodoByTelegramId (int $chatId)
+    {
+        $query = "SELECT * FROM todos INNER JOIN users on todos.user_id = users.id WHERE users.telegram_id = :chatId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            ":chatId" => $chatId
+        ]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }
