@@ -53,6 +53,17 @@ class Todo{
     }
 
 
+    public function updateStatus(int $id, string $status): bool
+    {
+        $query = "UPDATE todos SET status=:status, updated_at=NOW() where id=:id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ":id" => $id,
+            ":status" => $status
+        ]);
+    }
+
+
 
     public function getTodoByTelegramId (int $chatId)
     {

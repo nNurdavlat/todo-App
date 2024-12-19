@@ -22,12 +22,38 @@ $callbackChatId = $callbackQuery->message->chat->id;    // Callback ichida Id, T
 $callbackMessageId = $callbackQuery->message->message_id;
 
 
-if ($callbackData)
+if ($callbackQuery) // Agar tugma bosilgan bo'lsa
 {
-    $bot->makeRequest('sendMessage', [
-        'chat_id' => $callbackChatId,
-        'text' => $callbackData
-    ]);
+    if (mb_stripos($callbackData, 'task_') !== false)
+    {
+        $taskId = explode('task_', $callbackData)[1];
+        $todo = (new Todo())->getTodo($taskId);
+        $bot->makeRequest('sendMessage', [
+            'chat_id' => $callbackChatId,
+            'text' =>"Task: " . json_encode($todo),
+            'reply_markup' => json_encode([
+                'inline_keyboard' => [
+                    [
+                        ['callback_data' => "pending_" . $todo['id'], 'text' => 'Pending'],
+                        ['callback_data' => "in_progress_" . $todo['id'], 'text' => 'In progrees'],
+                        ['callback_data' => "completed_" . $todo['id'], 'text' => 'Complete'],
+                    ]
+                ]
+            ])
+        ]);
+    }
+    if (mb_stripos($callbackData, 'completed_') !== false) {
+        $taskId = explode('completed_', $callbackData)[1];
+        (new Todo())->updateStatus($taskId, 'completed');
+    }
+    if (mb_stripos($callbackData, 'in_progress_') !== false) {
+        $taskId = explode('in_progress_', $callbackData)[1];
+        (new Todo())->updateStatus($taskId, 'in_progress');
+    }
+    if (mb_stripos($callbackData, 'pending_') !== false) {
+        $taskId = explode('pending_', $callbackData)[1];
+        (new Todo())->updateStatus($taskId, 'pending');
+    }
 }
 
 
