@@ -56,7 +56,7 @@ class Todo{
 
     public function getTodoByTelegramId (int $chatId)
     {
-        $query = "SELECT * FROM todos INNER JOIN users on todos.user_id = users.id WHERE users.telegram_id = :chatId";
+        $query = "SELECT todos.title, todos.status, todos.due_date, todos.id as task_id FROM todos INNER JOIN users on todos.user_id = users.id WHERE users.telegram_id = :chatId";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
             ":chatId" => $chatId

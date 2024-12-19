@@ -53,7 +53,7 @@ class Bot
             $i ++;
             $buttons[] = [
                 'text' => $i,
-                'callback_data' => $task['id']
+                'callback_data' => "task_" . $task['task_id'] // Nechinchidir id li task (Masalan: task_8 bo'lsa 8-Idli task)
             ];
         }
         return array_chunk($buttons, 2);
