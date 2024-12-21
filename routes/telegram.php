@@ -6,6 +6,9 @@ use App\Todo;
 
 $bot  = new Bot();
 
+$redis = new Redis();
+$redis->connect("127.0.0.1", 6379);
+
 $update = json_decode(file_get_contents('php://input')); // Qanday yangilik kelganini olib beradi
 
 $chatID = $update->message->chat->id;
@@ -24,6 +27,19 @@ $callbackMessageId = $callbackQuery->message->message_id;
 
 if ($callbackQuery) // Agar tugma bosilgan bo'lsa
 {
+    if (mb_stripos($callbackData, "edit_") !== false)
+    {
+        $taskId = explode('edit_', $callbackData)[1];
+        $redis->set('edit_' . $callbackChatId, $taskId);
+
+        $bot->makeRequest('editMessageText', [
+            'chat_id' => $callbackChatId,
+            'message_id' => $callbackMessageId,
+            'text'=>"Enter new task title: ",
+        ]);
+    }
+
+
     if (mb_stripos($callbackData, 'task_') !== false)
     {
         $taskId = explode('task_', $callbackData)[1];
@@ -37,6 +53,9 @@ if ($callbackQuery) // Agar tugma bosilgan bo'lsa
                         ['callback_data' => "pending_" . $todo['id'], 'text' => 'Pending'],
                         ['callback_data' => "in_progress_" . $todo['id'], 'text' => 'In progrees'],
                         ['callback_data' => "completed_" . $todo['id'], 'text' => 'Complete'],
+                    ],
+                    [
+                        ['callback_data' => "edit_" . $todo['id'], 'text' => 'Edit'],
                     ]
                 ]
             ])
@@ -83,6 +102,18 @@ if ($message)
     if ($text == '/tasks') {
         $bot->sendUserTasks($chatID);
         exit();
+    }
+
+    if ($text) {
+        $taskId = $redis->get('edit_' . $chatID);
+        if ($taskId) {
+            (new Todo())->updateTitle($taskId, $text);
+            $bot->makeRequest('sendMessage', [
+                'chat_id' => $chatID,
+                'text' => "Changed task title"
+            ]);
+            $redis->del('edit_' . $chatID);
+        }
     }
 }
 
